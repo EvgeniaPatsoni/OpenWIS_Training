@@ -2,6 +2,13 @@ language: java
 
 jdk: openjdk11
 
+addons:
+  sonarcloud:
+    organization: "evgeniapatsoni"
+    token:
+      secure: "mX7y4y9oo/Vu4FQQNz/Xdt8LMtWCXAiPkCaPCFxo6PRNO+OC3csxvBFSiYoOLF25I0ZhCzVLyGLGEEjd7jM9jqVWGufPQh26HNDEs01jcuQSIKxO6NoNYp5a437N3LaNeBD1tLnzC3THdmNgnrsqfSH7olUM0moCUlp8hg5OZp/wlXgr18T6NsRv6X6Q12am41lJMM9ZdjDEOZnGFZPvLYPqpN1RlnpCBnZWFM/k9SQlbGEq6FckBYCOf5JpOwenOUAnR1DbvZwDYzNItuwJFrOYh0PS1vaEdRD1K7fwZRFy77hsP2LxDf2xn/kDAe5Vi95AjOAwtSfPx1qiv2+yR4UaGuYMTHguLsE9jnQRqK1gM4WYGhpGvarVN4R4N027z2M1KyWtTIwePrQAglbgIFTD6S3YFiB4V6exx8TBcM2sXZqRwqWaZP8HT3sooAjs7MjcQxeupbHrEs2wr3X3dUnjq7nqQqe9vdYNY9PB2qBb5gRM1bh9/nZrrI9XYjHDOHIjBXA5sqbAGVqvLFMSnvKk8JYL33f1n/XizNn3I/ui60GeBvGI98nUp2Zos9CwJm/eU+K3f7f5RFmgtxJE1EedcfALMF2D1CuQt2R5wk7nbQasiQK0/xQPBQK+Dd+uGTb0Z+ymr8A/zkcNv8LRrm9n0hB2ZkDCXxcEDNpsp7Y="
+
 script:
   - mvn clean install -Pjacoco-coverage
   - mvn org.owasp:dependency-check-maven:aggregate
+  - mvn sonar:sonar -Dsonar.projectKey=EvgeniaPatsoni_OpenWIS_Training
