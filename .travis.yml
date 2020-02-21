@@ -5,7 +5,6 @@ before_install:
   - openssl aes-256-cbc -K $encrypted_180f41e11b0e_key -iv $encrypted_180f41e11b0e_iv
     -in openwis_train_rsa.enc -out openwis_train_rsa -d
   - chmod +x mvnw
-  - chmod +x remote_deploy.sh
   - eval "$(ssh-agent -s)"
   - chmod 600 openwis_train_rsa
   - ssh-add openwis_train_rsa
@@ -22,7 +21,7 @@ deploy:
       branch: master
   - provider: script
     skip_cleanup: true
-    script: remote_deploy.sh
+    script: sh ${TRAVIS_BUILD_DIR}/remote_deploy.sh
     on:
       branch: master
 
