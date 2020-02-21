@@ -9,7 +9,7 @@ echo "##########################################################################
     pkill -9 -f cicd-example*
 
 	echo "Re-deploy Spring Boot application";
-	nohup java -jar cicd-example-1.0.0-SNAPSHOT.jar &>/dev/null &
+	nohup java -jar ${DEPLOY_DIRECTORY}/cicd-example-1.0.0-SNAPSHOT.jar &>/dev/null &
 
 echo "#################################################################################################################"
 EOF
