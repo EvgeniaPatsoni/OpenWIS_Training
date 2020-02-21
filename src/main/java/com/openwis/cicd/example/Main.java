@@ -1,4 +1,4 @@
-package com.openwis.helloworld;
+package com.openwis.cicd.example;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
