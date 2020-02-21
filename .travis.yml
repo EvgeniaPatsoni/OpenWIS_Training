@@ -5,6 +5,7 @@ before_install:
   - openssl aes-256-cbc -K $encrypted_180f41e11b0e_key -iv $encrypted_180f41e11b0e_iv
     -in openwis_train_rsa.enc -out openwis_train_rsa -d
   - chmod +x mvnw
+  - chmod +x remote_deploy.sh
   - eval "$(ssh-agent -s)"
   - chmod 600 openwis_train_rsa
   - ssh-add openwis_train_rsa
@@ -24,13 +25,6 @@ deploy:
     script: remote_deploy.sh
     on:
       branch: master
-
-notifications:
-  email:
-    recipients:
-      secure: "hfp9e6bp1ng5DABK84MxLDduulykiuEMwJfJl09Zv6KJpu6n2Yr388nQUw6GS5MRNo9coiky7syhufkQpU2KWbIvqMv5IkLbF9dLYZcyzuCooSXUz3/c9gaQ8EO44ZhtSRdd0pThN7xaabO3i9mDa8hf63UTOPUBuJgWXpyXEmXZeY/qFdtqJZ/+wHlOxw+Qz2OTKm6Qh3mwjG0WTfJUoviFZLrMsIhr7KRA4/R+6MJ4xijxOsqLiXkXcUXUibL8pdk9vpjnJbezY7Sn3KiKspvYY3tAIZinc3bA7E8hRikz69w5y5IFspmVfevC76whG5l4D6RFzvatoXbmpu8OMvSXfg4pbohvqaiDwnfh0fdZVd+eviT6cKlSVKJl1kmiBYWzRCSTF/ZBx/0XwC2ZF6AI8PK9s5synqITSlgOe/aUWKy8V9BThbE86r8KJWMwHD/6w0QWUxnCYHXCA1/16pIQAipA1n2yGczgNZa59YR1OU7QrZZ2r5ZrLj3RjIB2puANM2uLuIFVXtfOlfodJ/b+KWoZ4zhXBq9dx2HmZxKgrCRh145rzLv9/nYDUj31z2j8oRH02wSRh6vEAhN1YsOZSJ8GTDw88p8Q4sysjExk9jjskqZ7JF5S9E9/OF++AAWAw3pgGQebC0NMMJzFqIWrhv9acEYAOLQ37KWih3A="
-    on_success: always
-    on_failure: always
 
 addons:
   sonarcloud:
