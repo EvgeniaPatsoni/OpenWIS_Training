@@ -1,4 +1,4 @@
-package com.openwis.helloworld.service;
+package com.openwis.cicd.example.service;
 
 import static org.junit.Assert.assertEquals;
 
@@ -10,10 +10,10 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class HelloWorldServiceTest {
+public class IndexServiceTest {
 
   @InjectMocks
-  private HelloWorldService helloWorldService;
+  private IndexService helloWorldService;
   private int theSum;
 
   @Test

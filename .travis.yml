@@ -1,14 +1,6 @@
 language: java
-jdk: openjdk11
 
-before_install:
-  - openssl aes-256-cbc -K $encrypted_180f41e11b0e_key -iv $encrypted_180f41e11b0e_iv
-    -in openwis_train_rsa.enc -out openwis_train_rsa -d
-  - chmod +x mvnw
-  - eval "$(ssh-agent -s)"
-  - chmod 600 openwis_train_rsa
-  - ssh-add openwis_train_rsa
-  - echo -e "Host ${DEPLOY_HOST}\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
+jdk: openjdk11
 
 addons:
   sonarcloud:
@@ -16,15 +8,13 @@ addons:
     token:
       secure: mX7y4y9oo/Vu4FQQNz/Xdt8LMtWCXAiPkCaPCFxo6PRNO+OC3csxvBFSiYoOLF25I0ZhCzVLyGLGEEjd7jM9jqVWGufPQh26HNDEs01jcuQSIKxO6NoNYp5a437N3LaNeBD1tLnzC3THdmNgnrsqfSH7olUM0moCUlp8hg5OZp/wlXgr18T6NsRv6X6Q12am41lJMM9ZdjDEOZnGFZPvLYPqpN1RlnpCBnZWFM/k9SQlbGEq6FckBYCOf5JpOwenOUAnR1DbvZwDYzNItuwJFrOYh0PS1vaEdRD1K7fwZRFy77hsP2LxDf2xn/kDAe5Vi95AjOAwtSfPx1qiv2+yR4UaGuYMTHguLsE9jnQRqK1gM4WYGhpGvarVN4R4N027z2M1KyWtTIwePrQAglbgIFTD6S3YFiB4V6exx8TBcM2sXZqRwqWaZP8HT3sooAjs7MjcQxeupbHrEs2wr3X3dUnjq7nqQqe9vdYNY9PB2qBb5gRM1bh9/nZrrI9XYjHDOHIjBXA5sqbAGVqvLFMSnvKk8JYL33f1n/XizNn3I/ui60GeBvGI98nUp2Zos9CwJm/eU+K3f7f5RFmgtxJE1EedcfALMF2D1CuQt2R5wk7nbQasiQK0/xQPBQK+Dd+uGTb0Z+ymr8A/zkcNv8LRrm9n0hB2ZkDCXxcEDNpsp7Y=
 
-script:
-  - mvn clean install
-  - mvn sonar:sonar -Dsonar.projectKey=EvgeniaPatsoni_OpenWIS_Training
+before_install:
+  - openssl aes-256-cbc -K $encrypted_180f41e11b0e_key -iv $encrypted_180f41e11b0e_iv
+    -in openwis_train_rsa.enc -out openwis_train_rsa -d
+  - chmod +x mvnw
 
-env:
-  global:
-    - secure: ceZr+jKwKnlA9m82KTsdoRjyD0SlNJGqSWCDue867Uod/aQndIzaD/qzIFbvXm1ecMBsuhkkdKpFLuhWjGLwT6fiZE8P9eE3mbgTqYcln9+TqHNOIXgnhz4sbmSUhsPq2dp1x0cYnWZnzfOE4pLT745/HUntx/SU657tHepi9eyrEwEZ2komytu2CLNZ+i63oAuQJetrXRTsa3SqhvpZhNJ71oK1OTFPZ/ksPE1iV69vxdyEApc8GWKmFkAmm1CHx209qKZFXorFj944QztPYbWugiTXmxqJ2WeSOkiTBYGI4EpXn5avmwkKl4ARrw3i4b67ibObfJCXjaGFq06F4Eog5PFwE5S9APrD01wM9ASRDdOshd82umaZN1LA+ciTEcIaDHA7MMSSbPPhIxuiX5M6zWZie7PjvajR+tsqNubNvOP27OPnC9wgRehUpeIyg8tL1iqjbz5ttWG372HpLE6s8/0V9KniBaKhD4171wjy6mPU6b2CzOCACswp1bdkoAVlncX7t0Zz7mbAf9QYG20oFBa3fWZ1kZYeRQmiMUbzCszVQPQXsSabWPaFVulw5IH8J1rajXJL9erk1n8L1CU6nn2mtiWwyHKY0f7d18f8Hy0r4V0FAMAGR6pttUiYe+dMBcUB42mFpBSoMr1VTzNkD2sKEIg3KJD4L+y6vIA=
-    - secure: bXvPrtQk8KcpRNeYTOnPfU99LxtcwqXKbJG9QzLwDNswtcvktdvBlcjHA5wwSeKVprTY6BxrnVksH0oM14UUITJdsaIqnW19ejyF+9cgI7112k3qIw8Zvn0jWReJxeh0qIWBFVs5jTHW5wSpgE19IrLfrE/pJdiKQ6BRR60XaiIY1CJ1go9KUK+WETMg16D548iaxxd660cneiuN9d9418UXehBv3aRFqNvmyMaGtPpM0aQ9edeY7E0a684warc6egdBG8Cjuc1Y/kBp5GVFEEtsjDTxvfe1Q/s/57BWkgMnog4h9GvjjWxA/6JeVImDJdUG5hid81AsETnRG0j+niFalksurBZ0BGSX4jRFQXAet3BIfDo63WEzLvuaMYRIU8VBw0uJuEjDkwhg6sKsZ3BimTni6FfvG43rHTaFkDNtUh+44RcnrZHv+rWrv2ASXIrbxqANP8VaK36AEEPkn3td376jBqqu8m5YMu25+OxMOwG9gmt60AOsRYQT4NNxVmZbsqiB3d8y3T23QeWVVGD9Dfp61t0AxvJVCHcu/T39XpbiJTcSx+YTUimyiCI1RBIJ14xg/SZcatHG3ZcUb7GaLOJfKEek1fJCKQar2f8ylYe3O87Tbw6wvkTtQwhd6v+5G9RbWcHtTTGC2PEzDZRqu8/iLZozt8I9L+A7vv4=
-    - secure: CdxEHmOTk+mzo+MDHWXc9dpLJ//3/8API6+Fjrkj1H52fH5MPKqSLyBI0tWz2BTwrKZWpP1/Wj8uN9Hu82D2rR5H/ZrhFXkuUpjDrwE9+iPlE84U7+nqXU76fr5do51ZAU0e2Se8nXNabfAGWn4rEgdJUECCOaEaz3PAAXu6UAlF3PgxDPpBQqhS40yW7E2gavrm6Hu+7dkp7CKNAdWaq+I5t+qBPSgUeXXhf2yS/d6CTH+aYcFPZYvBjz1f7QtCFJj7xNSCMUbpSVrY/qO1ibwSKuGNprmeHNxfghVPJ/wV89hDwZLcpCCvsdkHJquMSQMzD++noOgyAFOTykgkhrbF82fYDY3E46E7bkB2XcrkAu8Wz4rWFi8A4hpbt3JK615xwgoJR1vqg61fSecDWqNL/rV/NYxnZEHDbt9xZIwhk6hkOIQ17tISRaWhpCiF9hy4J36nrbydYZ2A2gddsPavnYl4p8FI0IouLLtUDNiwf0EeVyLRJIk4xeyFJZz9pbrtvdEBiLg8FIDIMQRckMtPM1owVQDDfHSF2kIcm4hqMXas3fBFrGziqDVon6u3YUM92XGUZWxWPMvc0bp6vH2B8QnuybkUcprvCn0AVt96IgHCoPkYxOgUwLDbBTA9Wv8sme+w6/sruDPzyaDUWgSU6s9SRLmKdP18uiIgWx4=
+script:
+  - mvn clean install sonar:sonar -Dsonar.projectKey=EvgeniaPatsoni_OpenWIS_Training
 
 deploy:
   - provider: script
@@ -32,16 +22,12 @@ deploy:
     script: rsync -r --quiet --delete-after ${TRAVIS_BUILD_DIR}/target/cicd-example-*.jar ${DEPLOY_USER}@${DEPLOY_HOST}:${DEPLOY_DIRECTORY}
     on:
       branch: master
-  - provider: script
-    skip_cleanup: true
-    script: rsync -r --quiet --delete-after ${TRAVIS_BUILD_DIR}/start.sh ${DEPLOY_USER}@${DEPLOY_HOST}:${DEPLOY_DIRECTORY}
-    on:
-      branch: master
-  - provider: script
-    skip_cleanup: true
-    script: start.sh
-    on:
-      branch: master
+
+env:
+  global:
+    - secure: ceZr+jKwKnlA9m82KTsdoRjyD0SlNJGqSWCDue867Uod/aQndIzaD/qzIFbvXm1ecMBsuhkkdKpFLuhWjGLwT6fiZE8P9eE3mbgTqYcln9+TqHNOIXgnhz4sbmSUhsPq2dp1x0cYnWZnzfOE4pLT745/HUntx/SU657tHepi9eyrEwEZ2komytu2CLNZ+i63oAuQJetrXRTsa3SqhvpZhNJ71oK1OTFPZ/ksPE1iV69vxdyEApc8GWKmFkAmm1CHx209qKZFXorFj944QztPYbWugiTXmxqJ2WeSOkiTBYGI4EpXn5avmwkKl4ARrw3i4b67ibObfJCXjaGFq06F4Eog5PFwE5S9APrD01wM9ASRDdOshd82umaZN1LA+ciTEcIaDHA7MMSSbPPhIxuiX5M6zWZie7PjvajR+tsqNubNvOP27OPnC9wgRehUpeIyg8tL1iqjbz5ttWG372HpLE6s8/0V9KniBaKhD4171wjy6mPU6b2CzOCACswp1bdkoAVlncX7t0Zz7mbAf9QYG20oFBa3fWZ1kZYeRQmiMUbzCszVQPQXsSabWPaFVulw5IH8J1rajXJL9erk1n8L1CU6nn2mtiWwyHKY0f7d18f8Hy0r4V0FAMAGR6pttUiYe+dMBcUB42mFpBSoMr1VTzNkD2sKEIg3KJD4L+y6vIA=
+    - secure: bXvPrtQk8KcpRNeYTOnPfU99LxtcwqXKbJG9QzLwDNswtcvktdvBlcjHA5wwSeKVprTY6BxrnVksH0oM14UUITJdsaIqnW19ejyF+9cgI7112k3qIw8Zvn0jWReJxeh0qIWBFVs5jTHW5wSpgE19IrLfrE/pJdiKQ6BRR60XaiIY1CJ1go9KUK+WETMg16D548iaxxd660cneiuN9d9418UXehBv3aRFqNvmyMaGtPpM0aQ9edeY7E0a684warc6egdBG8Cjuc1Y/kBp5GVFEEtsjDTxvfe1Q/s/57BWkgMnog4h9GvjjWxA/6JeVImDJdUG5hid81AsETnRG0j+niFalksurBZ0BGSX4jRFQXAet3BIfDo63WEzLvuaMYRIU8VBw0uJuEjDkwhg6sKsZ3BimTni6FfvG43rHTaFkDNtUh+44RcnrZHv+rWrv2ASXIrbxqANP8VaK36AEEPkn3td376jBqqu8m5YMu25+OxMOwG9gmt60AOsRYQT4NNxVmZbsqiB3d8y3T23QeWVVGD9Dfp61t0AxvJVCHcu/T39XpbiJTcSx+YTUimyiCI1RBIJ14xg/SZcatHG3ZcUb7GaLOJfKEek1fJCKQar2f8ylYe3O87Tbw6wvkTtQwhd6v+5G9RbWcHtTTGC2PEzDZRqu8/iLZozt8I9L+A7vv4=
+    - secure: CdxEHmOTk+mzo+MDHWXc9dpLJ//3/8API6+Fjrkj1H52fH5MPKqSLyBI0tWz2BTwrKZWpP1/Wj8uN9Hu82D2rR5H/ZrhFXkuUpjDrwE9+iPlE84U7+nqXU76fr5do51ZAU0e2Se8nXNabfAGWn4rEgdJUECCOaEaz3PAAXu6UAlF3PgxDPpBQqhS40yW7E2gavrm6Hu+7dkp7CKNAdWaq+I5t+qBPSgUeXXhf2yS/d6CTH+aYcFPZYvBjz1f7QtCFJj7xNSCMUbpSVrY/qO1ibwSKuGNprmeHNxfghVPJ/wV89hDwZLcpCCvsdkHJquMSQMzD++noOgyAFOTykgkhrbF82fYDY3E46E7bkB2XcrkAu8Wz4rWFi8A4hpbt3JK615xwgoJR1vqg61fSecDWqNL/rV/NYxnZEHDbt9xZIwhk6hkOIQ17tISRaWhpCiF9hy4J36nrbydYZ2A2gddsPavnYl4p8FI0IouLLtUDNiwf0EeVyLRJIk4xeyFJZz9pbrtvdEBiLg8FIDIMQRckMtPM1owVQDDfHSF2kIcm4hqMXas3fBFrGziqDVon6u3YUM92XGUZWxWPMvc0bp6vH2B8QnuybkUcprvCn0AVt96IgHCoPkYxOgUwLDbBTA9Wv8sme+w6/sruDPzyaDUWgSU6s9SRLmKdP18uiIgWx4=
 
 notifications:
   email:
