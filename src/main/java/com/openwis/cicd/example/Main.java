@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@ComponentScan(basePackages = {"com.openwis.helloworld.controller"})
+@ComponentScan(basePackages = {"com.openwis.cicd.example.*"})
 public class Main {
 
   public static void main(String[] args) {
