@@ -2,6 +2,10 @@ language: java
 jdk: openjdk8
 dist: xenial
 sudo: required
+addons:
+  apt:
+    packages:
+    - openjdk-11-jdk
 
 #before_install:
 #  - openssl aes-256-cbc -K $encrypted_180f41e11b0e_key -iv $encrypted_180f41e11b0e_iv
