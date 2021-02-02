@@ -1,5 +1,6 @@
 language: java
 jdk: openjdk8
+dist: xenial
 
 #before_install:
 #  - openssl aes-256-cbc -K $encrypted_180f41e11b0e_key -iv $encrypted_180f41e11b0e_iv
@@ -12,12 +13,15 @@ jdk: openjdk8
 
 script:
 #  - mvn clean install sonar:sonar -Dsonar.projectKey=EvgeniaPatsoni_OpenWIS_Training
-  - mvn clean install
   - echo $JAVA_HOME
-  - export JAVA_HOME=$HOME/openjdk11
-  - wget https://github.com/sormuras/bach/raw/master/install-jdk.sh -O $TRAVIS_BUILD_DIR/install-jdk.sh
-  - chmod +x $TRAVIS_BUILD_DIR/install-jdk.sh
-  - $TRAVIS_BUILD_DIR/install-jdk.sh --install openjdk11 --target $JAVA_HOME
+  - mvn clean install
+  - apt -y update
+  - apt install -y openjdk-11-jdk
+  - update-java-alternatives -s java-1.11.0-openjdk-amd64
+  #- export JAVA_HOME=$HOME/openjdk11
+  # - wget https://github.com/sormuras/bach/raw/master/install-jdk.sh -O $TRAVIS_BUILD_DIR/install-jdk.sh
+  #- chmod +x $TRAVIS_BUILD_DIR/install-jdk.sh
+  #- $TRAVIS_BUILD_DIR/install-jdk.sh --install openjdk11 --target $JAVA_HOME
   - echo $JAVA_HOME
   - mvn sonar:sonar -Dsonar.projectKey=EvgeniaPatsoni_OpenWIS_Training
 
