@@ -3,15 +3,20 @@ jdk: openjdk8
 dist: trusty
 sudo: required
 
-before_install:
-  - wget https://github.com/sormuras/bach/raw/master/install-jdk.sh
-  - chmod +x install-jdk.sh
+addons:
+  apt:
+    packages:
+      - oracle-java11-installer
 
-matrix:
-  include:
+#before_install:
+#  - wget https://github.com/sormuras/bach/raw/master/install-jdk.sh
+#  - chmod +x install-jdk.sh
+
+#matrix:
+#  include:
     # 11
-    - env: JDK='OpenJDK 11'
-      install: . ./install-jdk.sh -F 11 -L GPL
+#    - env: JDK='OpenJDK 11'
+#      install: . ./install-jdk.sh -F 11 -L GPL
 
 #before_install:
 #  - openssl aes-256-cbc -K $encrypted_180f41e11b0e_key -iv $encrypted_180f41e11b0e_iv
@@ -31,7 +36,7 @@ script:
   #- sudo add-apt-repository -y ppa:openjdk-r/ppa
   #- sudo apt-get -y update
   #- sudo apt-get install -y openjdk-11-jdk
-  - jdk_switcher use openjdk11
+  - jdk_switcher use oraclejdk11
   - java -version
   - mvn sonar:sonar -Dsonar.projectKey=EvgeniaPatsoni_OpenWIS_Training
 
